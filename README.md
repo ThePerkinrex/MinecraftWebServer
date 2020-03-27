@@ -8,7 +8,7 @@ To make it work, you need the `screen` and `tail` commands installed on the syst
 
 then just start it with `yarn start`
 
-### Adding custom commands for the web console
+### Customizing the web console
 
 Create a js file in the `custom` folder to register new commands
 An example would be
