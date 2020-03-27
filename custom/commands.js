@@ -1,4 +1,5 @@
 const server = require('../server')
+const spawn = require('child_process').spawn
 
 const registerCommand = server.registerCommand
 const scheduleJob = server.scheduleJob
