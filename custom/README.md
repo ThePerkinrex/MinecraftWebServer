@@ -1,0 +1,1 @@
+Here you can put all the custom commands and handlers for the server. See the main README for an example
