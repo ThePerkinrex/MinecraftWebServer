@@ -52,9 +52,19 @@ function cancel(wss, execCommand) {
     cancel15 = true
 }
 
+function stopPoweroff(wss, execCommand) {
+    execCommand(wss, 'kick @a Apagando el server')
+    execCommand(wss, 'stop')
+    setTimeout(() => {
+        spawn('poweroff')
+    }, 1000 * 30)
+}
+
 registerCommand(/^stop15(?: poweroff)?/, stop15)
 
 registerCommand(/^cancel15/, cancel)
+
+registerCommand(/^stop poweroff$/, stopPoweroff)
 
 
 scheduleJob({ hour: 23, minute: 44 }, (wss, execCommand) => {
