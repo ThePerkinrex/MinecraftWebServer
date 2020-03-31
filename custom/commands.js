@@ -2,8 +2,6 @@ const server = require('../server')
 const spawn = require('child_process').spawn
 
 const registerCommand = server.registerCommand
-const scheduleJob = server.scheduleJob
-const registerDataHandler = server.registerDataHandler
 
 
 let cancel15 = false
@@ -65,23 +63,3 @@ registerCommand(/^stop15(?: poweroff)?/, stop15)
 registerCommand(/^cancel15/, cancel)
 
 registerCommand(/^stop poweroff$/, stopPoweroff)
-
-
-scheduleJob({ hour: 23, minute: 44 }, (wss, execCommand) => {
-    execCommand(wss, 'tellraw @a {"text":"[AVISO] Cierre automatico [AVISO]","bold":true,"color":"gold"}', false,
-        '[AVISO] Cierre automatico [AVISO]')
-    execCommand(wss, 'stop15 poweroff')
-})
-
-registerDataHandler((text, wss, execCommand) => { // Openblocks only handler
-    let match = text.match(/\/ob_inventory restore ([A-Za-z0-9_]+)/)
-    // console.log("-", match)
-    if (match !== null) {
-        if (match.length > 1) {
-            setTimeout(() => {
-                execCommand(wss, `title ${match[1]} title ["",{"text":"tremenda "},{"text":"F","bold":true,"italic":true,"color":"gold"}]`, false)
-                execCommand(wss, `tellraw ${match[1]} ["",{"text":"Has muerto","color":"dark_aqua"},{"text":" ","bold":true,"color":"dark_aqua"},{"score":{"name":"${match[1]}","objective":"deaths"},"bold":true,"color":"dark_aqua"},{"text":" veces. Tremenda F","color":"dark_aqua"}]`, false)
-            }, 2000)
-        }
-    }
-})
