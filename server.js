@@ -32,7 +32,10 @@ module.exports = {registerCommand, scheduleJob, registerDataHandler}
 if (require.main === module) {
 
     for(let file of fs.readdirSync(__dirname + '/custom/')) {
-        if(file.endsWith('.js')) require('./custom/' + file) // Only import js files
+        if(file.endsWith('.js')) {
+            console.log(`Loading ${file}`)
+            require('./custom/' + file)
+        } // Only import js files
     }
 
     function sendData(wss, data) {

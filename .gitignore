@@ -138,4 +138,5 @@ temp/
 
 config.json
 web/*.css*
+custom/*
 yarn.lock
