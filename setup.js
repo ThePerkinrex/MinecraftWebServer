@@ -24,7 +24,7 @@ if (!fs.existsSync('config.json')) {
 }
 
 function absolutePath() {
-    rl.question('What is the absolute path of the server directory', (answer) => {
+    rl.question('What is the absolute path of the server directory: ', (answer) => {
         if (fs.existsSync(answer)) {
             defaultConfig.serverDir = answer
             serverFile()
@@ -36,7 +36,7 @@ function absolutePath() {
 }
 
 function serverFile() {
-    rl.question('What is the filename of the server file', (answer) => {
+    rl.question('What is the filename of the server file: ', (answer) => {
         if (fs.existsSync(path.join(defaultConfig.serverDir, answer))) {
             defaultConfig.server.file = answer
             saveConfig()
@@ -53,6 +53,6 @@ function saveConfig() {
 }
 
 function done() {
-    console.log('Thats all correct, to change advanced settings go to the config.json file')
+    console.log('Config correct, to change advanced settings go to the config.json file')
     process.exit(0)
 }

@@ -137,3 +137,5 @@ temp/
 # End of https://www.gitignore.io/api/linux,node,visualstudiocode
 
 config.json
+web/*.css*
+yarn.lock

@@ -121,12 +121,14 @@ if (require.main === module) {
     let tailLogsProcess = tailLogs()
     
     function startServer() {
+        sendData(wss, 'Stopping tail command')
         tailLogsProcess.kill()
+        sendData(wss, 'Starting minecraft server')
         // screen -d -m -S MinecraftServer java -Xmx2G -Xms1G -jar forge-1.12.2-14.23.5.2847-universal.jar nogui
-        screen = spawn('screen', ['-d', '-m', '-S', 'MinecraftServer', 'java', config.server.jvmArguments, '-jar', config.server.file, 'nogui', config.server.serverArguments].flat(), { cwd: '/home/perc/Desktop/maninland' })
+        screen = spawn('screen', ['-d', '-m', '-S', 'MinecraftServer', 'java', config.server.jvmArguments, '-jar', config.server.file, 'nogui', config.server.serverArguments].flat(), { cwd: config.serverDir })
         //screen.stdout.on('data', (data)=>console.log(data.toString()))
         //screen.stderr.on('data', (data)=>console.log(data))
-        screen.on('close', (code) => { })
+        screen.on('close', (_code) => {})
         setTimeout(() => {
             tailLogsProcess = tailLogs()
         }, 2000);
@@ -136,6 +138,7 @@ if (require.main === module) {
         schedule.scheduleJob(job.time, job.fn.bind(null, wss, execCommand))
     }
     
+    console.log('Starting web server on port 3000 (localhost:3000)')
     server.listen(3000)    
 }
 
